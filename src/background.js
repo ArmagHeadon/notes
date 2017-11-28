@@ -6,7 +6,8 @@ const TRACKING_ID = 'UA-35433268-79';
 const KINTO_SERVER = 'https://kinto.dev.mozaws.net/v1';
 // XXX: Read this from Kinto fxa-params
 const FXA_CLIENT_ID = 'a3dbd8c5a6fd93e2';
-const FXA_PROFILE_SERVER = 'https://latest-keys.dev.lcip.org/profile/v1';
+const FXA_OAUTH_SERVER = 'https://oauth.accounts.firefox.com/v1';
+const FXA_PROFILE_SERVER = 'https://profile.accounts.firefox.com/v1';
 const FXA_SCOPES = ['profile', 'https://identity.mozilla.com/apps/notes'];
 const timeouts = {};
 
@@ -56,7 +57,7 @@ function authenticate() {
     redirectUri: browser.identity.getRedirectURL(),
     scopes: FXA_SCOPES,
   }).then((loginDetails) => {
-    const key = loginDetails.keys['https://identity.mozilla.org/apps/notes'];
+    const key = loginDetails.keys['https://identity.mozilla.com/apps/notes'];
     const credentials = {
       access_token: loginDetails.access_token,
       refresh_token: loginDetails.refresh_token,
